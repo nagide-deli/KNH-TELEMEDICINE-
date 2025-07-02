@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../../static/style/css/main.css">
+    <link rel="stylesheet" href="../../static/style/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/style/css/dashboard.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+            <div class="position-sticky">
+                <h3 class="text-white text-center py-3">Dashboard</h3>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">📚 Educational Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'appointment_create'%}">📅 Appointment Scheduling</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-white" href="{% url 'appointment_list'%}">📂My Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'medical_record_list'%}">📂 Medical Records</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{%url 'logout'%}">🚪 Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h2 id="greeting"></h2>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-light p-3">
+                        <h5>Educational Resources</h5>
+                        <p>Access health-related articles, guides, and wellness tips.</p>
+                        <a href="{%url 'educational_resources_list'%}" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card bg-light p-3">
+                        <h5>Appointment Scheduling</h5>
+                        <p>Schedule a consultation with a doctor at your convenience.</p>
+                        <a href="{% url 'appointment_create' %}" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card bg-light p-3">
+                        <h5>Medical Records</h5>
+                        <p>View your past consultations, prescriptions, and reports.</p>
+                        <a href="{% url 'medical_record_list'%}" class="btn btn-primary">View Records</a>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        {% if upcoming_appointments %}
+    <div class="alert alert-info">
+        <h5>Upcoming Appointments</h5>
+        <ul>
+            {% for appointment in upcoming_appointments %}
+                <li>Your appointment with Dr. {{ appointment.doctor.first_name }} is scheduled for {{ appointment.scheduled_time }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+    </div>
+</div>
+<script src="../../static/style/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../static/js/js/dashboard.js"></script>
+</body>
+</html>

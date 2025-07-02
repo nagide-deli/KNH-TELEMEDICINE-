@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Doctor Sign In</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="../../static/style/css/main.css">
+    <link rel="stylesheet" href="../../static/style/css/signup.css">
+    <link rel="stylesheet" href="../../static/style/vendor/bootstrap/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row align-items-center vh-100">
+        <!-- Left Side: Image -->
+        <div class="col-md-6 d-none d-md-block">
+            <img src="{% static 'images/blackdoc.jpg' %}" alt="Sign In" class="img-fluid">
+        </div>
+
+        <!-- Right Side: Sign-In Form -->
+        <div class="col-md-6">
+            <div class="signin-form">
+                <h2 class="text-center mb-4">Sign In</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="cta-btn w-100">Sign In</button>
+                </form>
+                <p class="mt-3 text-center">Don't have an account? <a href="{% url 'doctor_signup' %}">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="../../static/style/vendor/bootstrap/js/bootstrap.min.js">
+</body>
+</html>

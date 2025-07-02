@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Records</title>
+    <link rel="stylesheet" href="../../static/style/css/main.css">
+    <link rel="stylesheet" href="../../static/style/vendor/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-primary">Medical Records</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Diagnosis</th>
+                <th>Prescription</th>
+                <th>Doctor</th>
+                <th>File</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.date_created }}</td>
+                <td>{{ record.diagnosis }}</td>
+                <td>{{ record.prescription }}</td>
+                <td>{{ record.doctor.first_name }} {{ record.doctor.last_name }}</td>
+                <td>
+                    {% if record.medical_file %}
+                        <a href="{{ record.medical_file.url }}" target="_blank" class="btn btn-info btn-sm">View File</a>
+                    {% else %}
+
+                        No File
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No medical records available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if user.is_doctor %}
+<div class="mb-3 text-end">
+    <a href="{% url 'add_medical_record' %}" class="btn btn-success">Add Medical Record</a>
+</div>
+{% endif %}
+
+
+</div>
+
+
+
+<script src="../../static/style/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

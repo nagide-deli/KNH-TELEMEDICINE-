@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<link rel="stylesheet" href="../../static/style/css/main.css">
+<link rel="stylesheet" href="../../static/style/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../static/style/css/dashboard.css">
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  sidebar">
+            <div class="position-sticky">
+                <h4 class="text-center mt-3">Doctor Dashboard</h4>
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" href="">
+                            📊 Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{%url 'appointment_list'%}">
+                            📅 Appointments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{%url 'medical_record_list'%}">
+                            📁 Medical Records
+                        </a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'add_educational_resource'%}">📚 Educational Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{%url 'doctor_profile_update'%}">
+                            👤 Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{%url 'logout'%}">
+                            🚪 Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h2>Good morning, Dr. {{ request.user.first_name }}</h2>
+            </div>
+
+            <!-- Dashboard Summary -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Appointments</h5>
+                            <p class="card-text">{{ upcoming_appointments_count }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Patients</h5>
+                            <p class="card-text">{{ total_patients }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Earnings</h5>
+                            <p class="card-text">Ksh. {{ total_earnings }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Appointments Table -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    Recent Appointments
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for appointment in recent_appointments %}
+                            <tr>
+                                <td>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</td>
+                                <td>{{ appointment.date }}</td>
+                                <td>{{ appointment.time }}</td>
+                                <td>{{ appointment.status }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No recent appointments</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<script src="../../static/style/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.signup-form {
+    max-width: 400px;
+    margin: auto;
+
+
+}
+
+img {
+    max-width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.button {
+    background-color:  #00102e;
+    color: white;
+    border: none;
+}

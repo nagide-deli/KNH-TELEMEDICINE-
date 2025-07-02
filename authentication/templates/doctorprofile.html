@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="">
+
+</head>
+<body>
+    
+<div class="container mt-5">
+    <h2 class="text-center">Update Profile</h2>
+    <form method="POST" enctype="multipart/form-data" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Specialization:</label>
+            <input type="text" name="specialization" class="form-control" value="{{ profile.specialization }}">
+        </div>
+        <div class="form-group">
+            <label>Experience (years):</label>
+            <input type="number" name="experience" class="form-control" value="{{ profile.experience }}">
+        </div>
+        <div class="form-group">
+            <label>Contact Info:</label>
+            <input type="text" name="contact_info" class="form-control" value="{{ profile.contact_info }}">
+        </div>
+        <div class="form-group">
+            <label>Profile Picture:</label>
+            <input type="file" name="profile_picture" class="form-control">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" class="img-thumbnail mt-2" width="100">
+            {% endif %}
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
+
+

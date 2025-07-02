@@ -1,0 +1,11 @@
+ .resource-card {
+            transition: transform 0.2s;
+        }
+        .resource-card:hover {
+            transform: scale(1.02);
+        }
+        .comment-box, .qna-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
